@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="./support.js?v=2"></script>
 </head>
 <body>
 <x-dc>
@@ -160,7 +160,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
       <div data-reveal="" data-delay="300" style="display:flex;flex-wrap:wrap;gap:16px;margin-top:40px">
         <a href="#kontakt" data-magnetic="" style="position:relative;display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 28px;background:#C6A15B;color:#0B0B0A;font-size:15px;font-weight:500;border-radius:2px;overflow:hidden;transition:transform .5s cubic-bezier(.22,1,.36,1)">
           <span data-fill="" style="position:absolute;inset:0;background:#F1ECE2;transform:translateY(101%);transition:transform .6s cubic-bezier(.22,1,.36,1)"></span>
-          <span style="position:relative">Termin anfragen</span><span style="position:relative">→</span>
+          <span style="position:relative">Termin anfragen</span><span style="position:relative;display:inline-flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="square" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex:none"><path d="M1.5 8h12M9.5 4l4 4-4 4"/></svg></span>
         </a>
         <a href="#arbeiten" data-magnetic="" data-fill-color="#0B0B0A" style="position:relative;display:inline-flex;align-items:center;height:56px;padding:0 28px;border:1px solid rgba(241,236,226,.4);color:#F1ECE2;font-size:15px;font-weight:500;border-radius:2px;overflow:hidden;transition:transform .5s cubic-bezier(.22,1,.36,1),color .5s">
           <span data-fill="" style="position:absolute;inset:0;background:#F1ECE2;transform:translateY(101%);transition:transform .6s cubic-bezier(.22,1,.36,1)"></span>
@@ -268,7 +268,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
           <span style="position:absolute;left:16px;top:16px;font-size:11px;letter-spacing:.16em;background:#0B0B0A;color:#F1ECE2;padding:4px 8px">VORHER</span>
           <span style="position:absolute;right:16px;top:16px;font-size:11px;letter-spacing:.16em;background:#0B0B0A;color:#F1ECE2;padding:4px 8px">NACHHER</span>
           <div style="position:absolute;top:0;bottom:0;left:{{ b0.left }};width:1px;background:#C6A15B">
-            <div role="slider" data-handle="" tabIndex="0" aria-label="Vergleich Armband vorher und nachher" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ b0.pr }}" onKeyDown="{{ b0.key }}" style="position:absolute;top:50%;left:0;width:44px;height:44px;transform:translate(-50%,-50%);background:#0B0B0A;border:1px solid #C6A15B;border-radius:2px;display:flex;align-items:center;justify-content:center;gap:8px;color:#C6A15B;font-size:12px">‹ ›</div>
+            <div role="slider" data-handle="" tabIndex="0" aria-label="Vergleich Armband vorher und nachher" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ b0.pr }}" onKeyDown="{{ b0.key }}" style="position:absolute;top:50%;left:0;width:44px;height:44px;transform:translate(-50%,-50%);background:#0B0B0A;border:1px solid #C6A15B;border-radius:2px;display:flex;align-items:center;justify-content:center;gap:8px;color:#C6A15B;font-size:12px"><svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 1L1 5l4 4M17 1l4 4-4 4"/></svg></div>
           </div>
         </div>
         <figcaption style="display:flex;justify-content:space-between;gap:16px;padding-top:16px;font-size:15px;color:#8C8A85"><span style="color:#F1ECE2">Armband</span><span>Poliert und mattiert</span></figcaption>
@@ -281,7 +281,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
           <span style="position:absolute;left:16px;top:16px;font-size:11px;letter-spacing:.16em;background:#0B0B0A;color:#F1ECE2;padding:4px 8px">VORHER</span>
           <span style="position:absolute;right:16px;top:16px;font-size:11px;letter-spacing:.16em;background:#0B0B0A;color:#F1ECE2;padding:4px 8px">NACHHER</span>
           <div style="position:absolute;top:0;bottom:0;left:{{ b1.left }};width:1px;background:#C6A15B">
-            <div role="slider" data-handle="" tabIndex="0" aria-label="Vergleich Gehäuse und Lünette vorher und nachher" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ b1.pr }}" onKeyDown="{{ b1.key }}" style="position:absolute;top:50%;left:0;width:44px;height:44px;transform:translate(-50%,-50%);background:#0B0B0A;border:1px solid #C6A15B;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#C6A15B;font-size:12px">‹ ›</div>
+            <div role="slider" data-handle="" tabIndex="0" aria-label="Vergleich Gehäuse und Lünette vorher und nachher" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ b1.pr }}" onKeyDown="{{ b1.key }}" style="position:absolute;top:50%;left:0;width:44px;height:44px;transform:translate(-50%,-50%);background:#0B0B0A;border:1px solid #C6A15B;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#C6A15B;font-size:12px"><svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 1L1 5l4 4M17 1l4 4-4 4"/></svg></div>
           </div>
         </div>
         <figcaption style="display:flex;justify-content:space-between;gap:16px;padding-top:16px;font-size:15px;color:#8C8A85"><span style="color:#F1ECE2">Chronograph</span><span>Gehäuse und Lünette aufbereitet</span></figcaption>
@@ -294,7 +294,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
           <span style="position:absolute;left:16px;top:16px;font-size:11px;letter-spacing:.16em;background:#0B0B0A;color:#F1ECE2;padding:4px 8px">VORHER</span>
           <span style="position:absolute;right:16px;top:16px;font-size:11px;letter-spacing:.16em;background:#0B0B0A;color:#F1ECE2;padding:4px 8px">NACHHER</span>
           <div style="position:absolute;top:0;bottom:0;left:{{ b2.left }};width:1px;background:#C6A15B">
-            <div role="slider" data-handle="" tabIndex="0" aria-label="Vergleich Uhrglas vorher und nachher" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ b2.pr }}" onKeyDown="{{ b2.key }}" style="position:absolute;top:50%;left:0;width:44px;height:44px;transform:translate(-50%,-50%);background:#0B0B0A;border:1px solid #C6A15B;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#C6A15B;font-size:12px">‹ ›</div>
+            <div role="slider" data-handle="" tabIndex="0" aria-label="Vergleich Uhrglas vorher und nachher" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ b2.pr }}" onKeyDown="{{ b2.key }}" style="position:absolute;top:50%;left:0;width:44px;height:44px;transform:translate(-50%,-50%);background:#0B0B0A;border:1px solid #C6A15B;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#C6A15B;font-size:12px"><svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 1L1 5l4 4M17 1l4 4-4 4"/></svg></div>
           </div>
         </div>
         <figcaption style="display:flex;justify-content:space-between;gap:16px;padding-top:16px;font-size:15px;color:#8C8A85"><span style="color:#F1ECE2">Uhrglas</span><span>Kratzer auspoliert</span></figcaption>
@@ -515,7 +515,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
       <div data-reveal="" style="display:flex;flex-wrap:wrap;gap:16px">
         <a href="#kontakt" onClick="{{ pickSell }}" data-magnetic="" style="position:relative;display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 28px;background:#C6A15B;color:#0B0B0A;font-size:15px;font-weight:500;border-radius:2px;overflow:hidden;transition:transform .5s cubic-bezier(.22,1,.36,1)">
           <span data-fill="" style="position:absolute;inset:0;background:#F1ECE2;transform:translateY(101%);transition:transform .6s cubic-bezier(.22,1,.36,1)"></span>
-          <span style="position:relative">Anfrage stellen</span><span style="position:relative">→</span>
+          <span style="position:relative">Anfrage stellen</span><span style="position:relative;display:inline-flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="square" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex:none"><path d="M1.5 8h12M9.5 4l4 4-4 4"/></svg></span>
         </a>
       </div>
     </div>
@@ -542,7 +542,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
       </div>
       <a href="https://www.instagram.com/solothurnwatchclinic/" target="_blank" rel="noopener" data-magnetic="" data-fill-color="#0B0B0A" style="position:relative;display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 28px;border:1px solid rgba(241,236,226,.4);color:#F1ECE2;font-size:15px;font-weight:500;border-radius:2px;overflow:hidden;transition:transform .5s cubic-bezier(.22,1,.36,1),color .5s">
         <span data-fill="" style="position:absolute;inset:0;background:#F1ECE2;transform:translateY(101%);transition:transform .6s cubic-bezier(.22,1,.36,1)"></span>
-        <span style="position:relative">Profil auf Instagram</span><span style="position:relative">↗</span>
+        <span style="position:relative">Profil auf Instagram</span><span style="position:relative;display:inline-flex"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="square" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex:none"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></span>
       </a>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(46%,200px),1fr));gap:8px">
@@ -570,7 +570,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
         <div data-reveal="">
           <a href="https://ig.me/m/solothurnwatchclinic" target="_blank" rel="noopener" data-magnetic="" style="position:relative;display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 28px;background:#C6A15B;color:#0B0B0A;font-size:15px;font-weight:500;border-radius:2px;overflow:hidden;transition:transform .5s cubic-bezier(.22,1,.36,1)">
             <span data-fill="" style="position:absolute;inset:0;background:#F1ECE2;transform:translateY(101%);transition:transform .6s cubic-bezier(.22,1,.36,1)"></span>
-            <span style="position:relative">Nachricht auf Instagram</span><span style="position:relative">↗</span>
+            <span style="position:relative">Nachricht auf Instagram</span><span style="position:relative;display:inline-flex"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="square" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex:none"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></span>
           </a>
         </div>
         <dl data-reveal="" style="margin:0;display:grid;grid-template-columns:minmax(0,140px) minmax(0,1fr);border-top:1px solid #2A2926">
@@ -590,7 +590,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
               <span style="font-size:24px;font-weight:500;letter-spacing:-.02em;line-height:1.2">Nordstrasse 1<br>4543 Luterbach</span>
               <div style="display:flex;flex-wrap:wrap;gap:12px">
                 <button type="button" onClick="{{ loadMap }}" style="height:44px;padding:0 20px;background:#F1ECE2;color:#0B0B0A;border:0;border-radius:2px;font:inherit;font-size:14px;font-weight:500">Karte laden</button>
-                <a href="https://www.google.com/maps/search/?api=1&amp;query=Nordstrasse+1,+4543+Luterbach" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;height:44px;padding:0 20px;border:1px solid #3A3935;border-radius:2px;font-size:14px">In Google Maps öffnen ↗</a>
+                <a href="https://www.google.com/maps/search/?api=1&amp;query=Nordstrasse+1,+4543+Luterbach" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;height:44px;padding:0 20px;border:1px solid #3A3935;border-radius:2px;font-size:14px">In Google Maps öffnen<span style="display:inline-flex;margin-left:10px"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="square" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex:none"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></span></a>
               </div>
               <span style="font-size:13px;color:#8C8A85;max-width:420px">Beim Laden der Karte werden Daten an Google übertragen. Mehr dazu in der <a href="datenschutz.html" style="text-decoration:underline">Datenschutzerklärung</a>.</span>
             </div>
@@ -634,7 +634,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
               <span style="font-size:14px;color:#8C8A85">Preise auf Anfrage.</span>
               <button type="submit" data-magnetic="" style="position:relative;display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 28px;background:#C6A15B;color:#0B0B0A;font:inherit;font-size:15px;font-weight:500;border:0;border-radius:2px;overflow:hidden;transition:transform .5s cubic-bezier(.22,1,.36,1)">
                 <span data-fill="" style="position:absolute;inset:0;background:#F1ECE2;transform:translateY(101%);transition:transform .6s cubic-bezier(.22,1,.36,1)"></span>
-                <span style="position:relative">Anfrage senden</span><span style="position:relative">→</span>
+                <span style="position:relative">Anfrage senden</span><span style="position:relative;display:inline-flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="square" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex:none"><path d="M1.5 8h12M9.5 4l4 4-4 4"/></svg></span>
               </button>
             </div>
           </form>
