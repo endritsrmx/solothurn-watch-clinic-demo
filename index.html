@@ -2,12 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Solothurn Watch Clinic – Uhrenservice, Revision und Aufbereitung in Solothurn</title>
 <meta name="description" content="Service, Revision, Reparatur und Aufbereitung von Uhren in Solothurn. Restauration von Vintage- und Taschenuhren, An- und Verkauf. Qualität aus Solothurn.">
 <meta property="og:title" content="Solothurn Watch Clinic">
@@ -17,9 +12,10 @@
 <meta name="theme-color" content="#0B0B0A">
 <link rel="icon" href="assets/profil.jpg">
 <link rel="preload" href="assets/fonts/InterTight-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin="">
-<link rel="preload" href="assets/post-01-1440.webp" as="image" imagesrcset="assets/post-01-720.webp 720w, assets/post-01-1440.webp 1440w" imagesizes="100vw">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
+<link rel="preload" as="image" href="assets/post-01-720.webp" media="(max-width: 1023px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/post-01-1440.webp" media="(min-width: 1024px)" fetchpriority="high">
+<link rel="preload" href="vendor/react.production.min.js?v=3" as="script">
+<link rel="preload" href="vendor/react-dom.production.min.js?v=3" as="script">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Solothurn Watch Clinic","description":"Service, Revision, Reparatur und Aufbereitung von Uhren. Restauration von Vintage- und Taschenuhren, An- und Verkauf.","slogan":"Qualität aus Solothurn","image":"assets/og-image.jpg","logo":"assets/profil.jpg","address":{"@type":"PostalAddress","streetAddress":"Nordstrasse 1","postalCode":"4543","addressLocality":"Luterbach","addressCountry":"CH"},"telephone":"+41 79 777 477","email":"info@sowatchclinic.ch","openingHours":"Mo-Fr 08:00-17:00","priceRange":"auf Anfrage","sameAs":["https://www.instagram.com/solothurnwatchclinic/"]}</script>
 <style>
 @font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url(assets/fonts/InstrumentSerif-italic-400-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
@@ -41,16 +37,28 @@ a:hover{color:#C6A15B}
 :focus-visible{outline:1px solid #C6A15B;outline-offset:4px}
 input::placeholder,textarea::placeholder{color:#6E6C67}
 html.swc-cursor,html.swc-cursor *{cursor:none !important}
-body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+x-dc{display:none!important}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.08;background-image:url("assets/grain.webp");background-size:140px 140px}
 @keyframes swcDraw{from{stroke-dashoffset:604}to{stroke-dashoffset:0}}
 @keyframes swcSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes swcUp{from{opacity:0;transform:translate3d(0,32px,0)}to{opacity:1;transform:none}}
 @keyframes swcFade{from{opacity:0}to{opacity:1}}
 @keyframes swcIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@media (hover: hover) and (pointer: fine) {
+  [data-zoom]{transition:transform .9s cubic-bezier(.22,1,.36,1),filter .9s cubic-bezier(.22,1,.36,1) !important}
+}
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  [data-zoom]{transform:scale(1.14) translateZ(0);transition:transform 1.6s cubic-bezier(.22,1,.36,1) !important}
+  [data-zoom].is-in{transform:translateZ(0) !important;filter:saturate(1) contrast(1.04) sepia(.04) !important}
+}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.2s !important}}
 </style>
-</helmet>
-
+<script src="vendor/react.production.min.js?v=3"></script>
+<script src="vendor/react-dom.production.min.js?v=3"></script>
+<script src="./support.js?v=3"></script>
+</head>
+<body>
+<x-dc>
 <div id="top" style="position:relative;background:#0B0B0A;color:#F1ECE2;overflow-x:clip;font-size:17px;line-height:1.55">
 
 <sc-if value="{{ intro }}" hint-placeholder-val="{{ false }}">
@@ -91,8 +99,8 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
   </div>
 </sc-if>
 
-<header style="position:fixed;top:0;left:0;right:0;z-index:90;transform:{{ headerTf }};transition:transform .6s cubic-bezier(.22,1,.36,1),background-color .6s cubic-bezier(.22,1,.36,1);background:{{ headerBg }};border-bottom:1px solid {{ headerLine }}">
-  <div style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,48px);height:{{ headerH }};display:flex;align-items:center;justify-content:space-between;gap:24px;transition:height .6s cubic-bezier(.22,1,.36,1)">
+<header data-header="" style="position:fixed;top:0;left:0;right:0;z-index:90;transform:{{ headerTf }};transition:transform .6s cubic-bezier(.22,1,.36,1),background-color .6s cubic-bezier(.22,1,.36,1);background:{{ headerBg }};border-bottom:1px solid {{ headerLine }}">
+  <div data-header-bar="" style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,48px);height:{{ headerH }};display:flex;align-items:center;justify-content:space-between;gap:24px;transition:height .6s cubic-bezier(.22,1,.36,1)">
     <a href="#top" aria-label="Solothurn Watch Clinic, zum Seitenanfang" style="display:flex;align-items:center;gap:12px;color:#F1ECE2">
       <img src="assets/profil.jpg" alt="Logo Solothurn Watch Clinic" width="40" height="40" style="width:40px;height:40px;display:block"></img>
       <span style="font-size:12px;font-weight:500;letter-spacing:.2em;line-height:1.25">SOLOTHURN<br>WATCH CLINIC</span>
@@ -100,8 +108,8 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
       <nav aria-label="Hauptnavigation" style="display:flex;align-items:center;gap:32px">
         <sc-for list="{{ nav }}" as="n" hint-placeholder-count="6">
-          <a href="{{ n.href }}" style="position:relative;display:flex;align-items:center;gap:8px;font-size:14px;color:{{ n.color }};transition:color .4s">
-            <span style="width:5px;height:5px;border-radius:50%;background:#C6A15B;opacity:{{ n.dot }};transform:scale({{ n.dot }});transition:all .5s cubic-bezier(.22,1,.36,1)"></span>{{ n.label }}
+          <a href="{{ n.href }}" data-nav="{{ n.id }}" style="position:relative;display:flex;align-items:center;gap:8px;font-size:14px;color:{{ n.color }};transition:color .4s">
+            <span data-nav-dot="" style="width:5px;height:5px;border-radius:50%;background:#C6A15B;opacity:{{ n.dot }};transform:scale({{ n.dot }});transition:all .5s cubic-bezier(.22,1,.36,1)"></span>{{ n.label }}
           </a>
         </sc-for>
       </nav>
@@ -143,7 +151,12 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
 
 <section ref="{{ heroRef }}" aria-label="Einleitung" style="position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:#0B0B0A">
   <div style="position:absolute;inset:0;overflow:hidden">
-    <img ref="{{ heroImgRef }}" src="assets/post-01-1440.webp" srcset="assets/post-01-720.webp 720w, assets/post-01-1440.webp 1440w" sizes="100vw" decoding="async" alt="Zerlegtes Uhrwerk mit Zifferblatt, Platine und Rädern, geordnet in einer Werkstattschale" fetchpriority="high" style="position:absolute;inset:-4% 0 0 0;width:100%;height:108%;object-fit:cover;object-position:50% 40%;filter:saturate(.75) contrast(1.1) sepia(.18) brightness(.62);transform:scale(1.06);will-change:transform"></img>
+    <div ref="{{ heroMoveRef }}" style="position:absolute;inset:-4% 0 0 0;width:100%;height:108%;transform:scale(1.06)">
+      <picture style="display:block;width:100%;height:100%">
+        <source media="(min-width: 1024px)" srcset="assets/post-01-1440.webp"></source>
+        <img ref="{{ heroImgRef }}" src="assets/post-01-720.webp" decoding="async" alt="Zerlegtes Uhrwerk mit Zifferblatt, Platine und Rädern, geordnet in einer Werkstattschale" fetchpriority="high" width="720" height="540" style="width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:saturate(.75) contrast(1.1) sepia(.18) brightness(.62);transform:translateZ(0);display:block"></img>
+      </picture>
+    </div>
     <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,10,.55) 0%,rgba(11,11,10,.15) 35%,rgba(11,11,10,.85) 82%,#0B0B0A 100%)"></div>
   </div>
   <div style="position:relative;width:100%;max-width:1360px;margin:0 auto;padding:160px clamp(20px,4vw,48px) 56px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:48px">
@@ -201,39 +214,39 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
     </div>
     <div style="border-top:1px solid #D8D1C3">
       <div data-reveal="" data-svc="0" data-cursor="view" onMouseEnter="{{ s0.enter }}" onMouseLeave="{{ leaveService }}" style="position:relative;display:flex;flex-wrap:wrap;gap:16px 32px;padding:32px 0;border-bottom:1px solid #D8D1C3">
-        <span style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#C6A15B;transform-origin:left;transform:{{ s0.line }};transition:transform .7s cubic-bezier(.22,1,.36,1)"></span>
-        <span style="flex:0 0 64px;font-size:15px;font-variant-numeric:tabular-nums;color:{{ s0.num }};transition:color .4s;padding-top:10px">01</span>
-        <h3 style="margin:0;flex:1 1 300px;font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;transform:{{ s0.shift }};transition:transform .6s cubic-bezier(.22,1,.36,1)">Service und Revision</h3>
+        <span data-svc-line="" style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#C6A15B;transform-origin:left;transform:{{ s0.line }};transition:transform .7s cubic-bezier(.22,1,.36,1)"></span>
+        <span data-svc-num="" style="flex:0 0 64px;font-size:15px;font-variant-numeric:tabular-nums;color:{{ s0.num }};transition:color .4s;padding-top:10px">01</span>
+        <h3 data-svc-title="" style="margin:0;flex:1 1 300px;font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;transform:{{ s0.shift }};transition:transform .6s cubic-bezier(.22,1,.36,1)">Service und Revision</h3>
         <p style="margin:0;flex:1.3 1 340px;color:#5E5C57;padding-top:6px">Wir zerlegen das Werk vollständig, reinigen, ölen und regulieren es neu ein. Danach prüfen wir Gang und Funktionen, bevor die Uhr zu Ihnen zurückgeht.</p>
       </div>
       <div data-reveal="" data-svc="1" data-cursor="view" onMouseEnter="{{ s1.enter }}" onMouseLeave="{{ leaveService }}" style="position:relative;display:flex;flex-wrap:wrap;gap:16px 32px;padding:32px 0;border-bottom:1px solid #D8D1C3">
-        <span style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#C6A15B;transform-origin:left;transform:{{ s1.line }};transition:transform .7s cubic-bezier(.22,1,.36,1)"></span>
-        <span style="flex:0 0 64px;font-size:15px;font-variant-numeric:tabular-nums;color:{{ s1.num }};transition:color .4s;padding-top:10px">02</span>
-        <h3 style="margin:0;flex:1 1 300px;font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;transform:{{ s1.shift }};transition:transform .6s cubic-bezier(.22,1,.36,1)">Reparatur</h3>
+        <span data-svc-line="" style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#C6A15B;transform-origin:left;transform:{{ s1.line }};transition:transform .7s cubic-bezier(.22,1,.36,1)"></span>
+        <span data-svc-num="" style="flex:0 0 64px;font-size:15px;font-variant-numeric:tabular-nums;color:{{ s1.num }};transition:color .4s;padding-top:10px">02</span>
+        <h3 data-svc-title="" style="margin:0;flex:1 1 300px;font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;transform:{{ s1.shift }};transition:transform .6s cubic-bezier(.22,1,.36,1)">Reparatur</h3>
         <p style="margin:0;flex:1.3 1 340px;color:#5E5C57;padding-top:6px">Steht die Uhr still oder geht sie falsch, suchen wir die Ursache im Werk. Defekte Teile wie eine Schwungmassenachse ersetzen wir und kontrollieren danach jede Funktion.</p>
       </div>
       <div data-reveal="" data-svc="2" data-cursor="view" onMouseEnter="{{ s2.enter }}" onMouseLeave="{{ leaveService }}" style="position:relative;display:flex;flex-wrap:wrap;gap:16px 32px;padding:32px 0;border-bottom:1px solid #D8D1C3">
-        <span style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#C6A15B;transform-origin:left;transform:{{ s2.line }};transition:transform .7s cubic-bezier(.22,1,.36,1)"></span>
-        <span style="flex:0 0 64px;font-size:15px;font-variant-numeric:tabular-nums;color:{{ s2.num }};transition:color .4s;padding-top:10px">03</span>
-        <h3 style="margin:0;flex:1 1 300px;font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;transform:{{ s2.shift }};transition:transform .6s cubic-bezier(.22,1,.36,1)">Aufbereitung</h3>
+        <span data-svc-line="" style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#C6A15B;transform-origin:left;transform:{{ s2.line }};transition:transform .7s cubic-bezier(.22,1,.36,1)"></span>
+        <span data-svc-num="" style="flex:0 0 64px;font-size:15px;font-variant-numeric:tabular-nums;color:{{ s2.num }};transition:color .4s;padding-top:10px">03</span>
+        <h3 data-svc-title="" style="margin:0;flex:1 1 300px;font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;transform:{{ s2.shift }};transition:transform .6s cubic-bezier(.22,1,.36,1)">Aufbereitung</h3>
         <p style="margin:0;flex:1.3 1 340px;color:#5E5C57;padding-top:6px">Gehäuse und Armband polieren und mattieren wir, Fläche für Fläche, im Wechsel von Matt und Glanz. Kratzer im Glas polieren wir aus, beschädigte Lünetten setzen wir instand.</p>
       </div>
       <div data-reveal="" data-svc="3" data-cursor="view" onMouseEnter="{{ s3.enter }}" onMouseLeave="{{ leaveService }}" style="position:relative;display:flex;flex-wrap:wrap;gap:16px 32px;padding:32px 0;border-bottom:1px solid #D8D1C3">
-        <span style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#C6A15B;transform-origin:left;transform:{{ s3.line }};transition:transform .7s cubic-bezier(.22,1,.36,1)"></span>
-        <span style="flex:0 0 64px;font-size:15px;font-variant-numeric:tabular-nums;color:{{ s3.num }};transition:color .4s;padding-top:10px">04</span>
-        <h3 style="margin:0;flex:1 1 300px;font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;transform:{{ s3.shift }};transition:transform .6s cubic-bezier(.22,1,.36,1)">Batterie und Dichtigkeit</h3>
+        <span data-svc-line="" style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#C6A15B;transform-origin:left;transform:{{ s3.line }};transition:transform .7s cubic-bezier(.22,1,.36,1)"></span>
+        <span data-svc-num="" style="flex:0 0 64px;font-size:15px;font-variant-numeric:tabular-nums;color:{{ s3.num }};transition:color .4s;padding-top:10px">04</span>
+        <h3 data-svc-title="" style="margin:0;flex:1 1 300px;font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;transform:{{ s3.shift }};transition:transform .6s cubic-bezier(.22,1,.36,1)">Batterie und Dichtigkeit</h3>
         <p style="margin:0;flex:1.3 1 340px;color:#5E5C57;padding-top:6px">Wir wechseln die Batterie und prüfen dabei die Dichtungen. Auf Wunsch testen wir die Wasserdichtigkeit Ihrer Uhr.</p>
       </div>
       <div data-reveal="" data-svc="4" data-cursor="view" onMouseEnter="{{ s4.enter }}" onMouseLeave="{{ leaveService }}" style="position:relative;display:flex;flex-wrap:wrap;gap:16px 32px;padding:32px 0;border-bottom:1px solid #D8D1C3">
-        <span style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#C6A15B;transform-origin:left;transform:{{ s4.line }};transition:transform .7s cubic-bezier(.22,1,.36,1)"></span>
-        <span style="flex:0 0 64px;font-size:15px;font-variant-numeric:tabular-nums;color:{{ s4.num }};transition:color .4s;padding-top:10px">05</span>
-        <h3 style="margin:0;flex:1 1 300px;font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;transform:{{ s4.shift }};transition:transform .6s cubic-bezier(.22,1,.36,1)">Restauration Vintage und Taschenuhren</h3>
+        <span data-svc-line="" style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#C6A15B;transform-origin:left;transform:{{ s4.line }};transition:transform .7s cubic-bezier(.22,1,.36,1)"></span>
+        <span data-svc-num="" style="flex:0 0 64px;font-size:15px;font-variant-numeric:tabular-nums;color:{{ s4.num }};transition:color .4s;padding-top:10px">05</span>
+        <h3 data-svc-title="" style="margin:0;flex:1 1 300px;font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;transform:{{ s4.shift }};transition:transform .6s cubic-bezier(.22,1,.36,1)">Restauration Vintage und Taschenuhren</h3>
         <p style="margin:0;flex:1.3 1 340px;color:#5E5C57;padding-top:6px">Alte Uhren und Taschenuhren bringen wir nach Jahren des Stillstands wieder zum Laufen. Wir zerlegen sie komplett, entfernen Rost und polieren jedes Teil.</p>
       </div>
       <div data-reveal="" data-svc="5" data-cursor="view" onMouseEnter="{{ s5.enter }}" onMouseLeave="{{ leaveService }}" style="position:relative;display:flex;flex-wrap:wrap;gap:16px 32px;padding:32px 0;border-bottom:1px solid #D8D1C3">
-        <span style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#C6A15B;transform-origin:left;transform:{{ s5.line }};transition:transform .7s cubic-bezier(.22,1,.36,1)"></span>
-        <span style="flex:0 0 64px;font-size:15px;font-variant-numeric:tabular-nums;color:{{ s5.num }};transition:color .4s;padding-top:10px">06</span>
-        <h3 style="margin:0;flex:1 1 300px;font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;transform:{{ s5.shift }};transition:transform .6s cubic-bezier(.22,1,.36,1)">An- und Verkauf</h3>
+        <span data-svc-line="" style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#C6A15B;transform-origin:left;transform:{{ s5.line }};transition:transform .7s cubic-bezier(.22,1,.36,1)"></span>
+        <span data-svc-num="" style="flex:0 0 64px;font-size:15px;font-variant-numeric:tabular-nums;color:{{ s5.num }};transition:color .4s;padding-top:10px">06</span>
+        <h3 data-svc-title="" style="margin:0;flex:1 1 300px;font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;transform:{{ s5.shift }};transition:transform .6s cubic-bezier(.22,1,.36,1)">An- und Verkauf</h3>
         <p style="margin:0;flex:1.3 1 340px;color:#5E5C57;padding-top:6px">Wir kaufen Ihre Uhr an oder bieten Ihnen eine geprüfte Uhr zum Kauf an. Schreiben Sie uns Marke, Modell und Zustand.</p>
       </div>
     </div>
@@ -242,7 +255,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
 
 <sc-if value="{{ showPreview }}" hint-placeholder-val="{{ false }}">
   <div ref="{{ previewRef }}" aria-hidden="true" style="position:fixed;left:0;top:0;width:280px;height:350px;z-index:60;pointer-events:none;overflow:hidden;border-radius:2px;opacity:{{ prevOp }};transition:opacity .45s cubic-bezier(.22,1,.36,1)">
-    <img ref="{{ prevImgRef }}" src="assets/post-02-720.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85) contrast(1.06) sepia(.08);transform:scale({{ prevScale }});transition:transform .8s cubic-bezier(.22,1,.36,1)"></img>
+    <img ref="{{ prevImgRef }}" alt="" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85) contrast(1.06) sepia(.08);transform:scale({{ prevScale }});transition:transform .8s cubic-bezier(.22,1,.36,1)"></img>
   </div>
 </sc-if>
 
@@ -263,11 +276,13 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
 
       <figure data-reveal="" style="margin:0">
         <div data-cursor="drag" onPointerDown="{{ b0.down }}" style="position:relative;aspect-ratio:4/5;overflow:hidden;background:#1A1A18;touch-action:pan-y;user-select:none">
-          <div style="position:absolute;inset:0;background-image:url(assets/post-08-1440.webp);background-size:200% auto;background-position:100% 50%;background-repeat:no-repeat;filter:saturate(.8) contrast(1.06) sepia(.08)"></div>
-          <div style="position:absolute;inset:0;background-image:url(assets/post-08-1440.webp);background-size:200% auto;background-position:0% 50%;background-repeat:no-repeat;filter:saturate(.8) contrast(1.06) sepia(.08);clip-path:{{ b0.clip }}"></div>
+          <div data-lazy="assets/post-08-720.webp" data-lazy-hi="assets/post-08-1440.webp" data-lazy-wide="" style="position:absolute;inset:0;background-size:200% auto;background-position:100% 50%;background-repeat:no-repeat;filter:saturate(.8) contrast(1.06) sepia(.08);transform:translateZ(0)"></div>
+          <div data-ba-clip="" style="position:absolute;inset:0;clip-path:{{ b0.clip }}">
+            <div data-lazy="assets/post-08-720.webp" data-lazy-hi="assets/post-08-1440.webp" data-lazy-wide="" style="position:absolute;inset:0;background-size:200% auto;background-position:0% 50%;background-repeat:no-repeat;filter:saturate(.8) contrast(1.06) sepia(.08);transform:translateZ(0)"></div>
+          </div>
           <span style="position:absolute;left:16px;top:16px;font-size:11px;letter-spacing:.16em;background:#0B0B0A;color:#F1ECE2;padding:4px 8px">VORHER</span>
           <span style="position:absolute;right:16px;top:16px;font-size:11px;letter-spacing:.16em;background:#0B0B0A;color:#F1ECE2;padding:4px 8px">NACHHER</span>
-          <div style="position:absolute;top:0;bottom:0;left:{{ b0.left }};width:1px;background:#C6A15B">
+          <div data-ba-bar="" style="position:absolute;top:0;bottom:0;left:{{ b0.left }};width:1px;background:#C6A15B">
             <div role="slider" data-handle="" tabIndex="0" aria-label="Vergleich Armband vorher und nachher" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ b0.pr }}" onKeyDown="{{ b0.key }}" style="position:absolute;top:50%;left:0;width:44px;height:44px;transform:translate(-50%,-50%);background:#0B0B0A;border:1px solid #C6A15B;border-radius:2px;display:flex;align-items:center;justify-content:center;gap:8px;color:#C6A15B;font-size:12px"><svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 1L1 5l4 4M17 1l4 4-4 4"/></svg></div>
           </div>
         </div>
@@ -276,11 +291,13 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
 
       <figure data-reveal="" data-delay="100" style="margin:0">
         <div data-cursor="drag" onPointerDown="{{ b1.down }}" style="position:relative;aspect-ratio:4/5;overflow:hidden;background:#1A1A18;touch-action:pan-y;user-select:none">
-          <div style="position:absolute;inset:0;background-image:url(assets/post-10-1440.webp);background-size:auto 200%;background-position:86.8% 0%;background-repeat:no-repeat;filter:saturate(.8) contrast(1.06) sepia(.08)"></div>
-          <div style="position:absolute;inset:0;background-image:url(assets/post-10-1440.webp);background-size:auto 200%;background-position:13.2% 0%;background-repeat:no-repeat;filter:saturate(.8) contrast(1.06) sepia(.08);clip-path:{{ b1.clip }}"></div>
+          <div data-lazy="assets/post-10-720.webp" data-lazy-hi="assets/post-10-1440.webp" data-lazy-wide="" style="position:absolute;inset:0;background-size:auto 200%;background-position:86.8% 0%;background-repeat:no-repeat;filter:saturate(.8) contrast(1.06) sepia(.08);transform:translateZ(0)"></div>
+          <div data-ba-clip="" style="position:absolute;inset:0;clip-path:{{ b1.clip }}">
+            <div data-lazy="assets/post-10-720.webp" data-lazy-hi="assets/post-10-1440.webp" data-lazy-wide="" style="position:absolute;inset:0;background-size:auto 200%;background-position:13.2% 0%;background-repeat:no-repeat;filter:saturate(.8) contrast(1.06) sepia(.08);transform:translateZ(0)"></div>
+          </div>
           <span style="position:absolute;left:16px;top:16px;font-size:11px;letter-spacing:.16em;background:#0B0B0A;color:#F1ECE2;padding:4px 8px">VORHER</span>
           <span style="position:absolute;right:16px;top:16px;font-size:11px;letter-spacing:.16em;background:#0B0B0A;color:#F1ECE2;padding:4px 8px">NACHHER</span>
-          <div style="position:absolute;top:0;bottom:0;left:{{ b1.left }};width:1px;background:#C6A15B">
+          <div data-ba-bar="" style="position:absolute;top:0;bottom:0;left:{{ b1.left }};width:1px;background:#C6A15B">
             <div role="slider" data-handle="" tabIndex="0" aria-label="Vergleich Gehäuse und Lünette vorher und nachher" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ b1.pr }}" onKeyDown="{{ b1.key }}" style="position:absolute;top:50%;left:0;width:44px;height:44px;transform:translate(-50%,-50%);background:#0B0B0A;border:1px solid #C6A15B;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#C6A15B;font-size:12px"><svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 1L1 5l4 4M17 1l4 4-4 4"/></svg></div>
           </div>
         </div>
@@ -289,11 +306,13 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
 
       <figure data-reveal="" data-delay="200" style="margin:0">
         <div data-cursor="drag" onPointerDown="{{ b2.down }}" style="position:relative;aspect-ratio:4/5;overflow:hidden;background:#1A1A18;touch-action:pan-y;user-select:none">
-          <div style="position:absolute;inset:0;background-image:url(assets/post-11-1440.webp);background-size:auto 200%;background-position:50% 100%;background-repeat:no-repeat;filter:saturate(.8) contrast(1.06) sepia(.08)"></div>
-          <div style="position:absolute;inset:0;background-image:url(assets/post-11-1440.webp);background-size:auto 200%;background-position:50% 0%;background-repeat:no-repeat;filter:saturate(.8) contrast(1.06) sepia(.08);clip-path:{{ b2.clip }}"></div>
+          <div data-lazy="assets/post-11-720.webp" data-lazy-hi="assets/post-11-1440.webp" data-lazy-wide="" style="position:absolute;inset:0;background-size:auto 200%;background-position:50% 100%;background-repeat:no-repeat;filter:saturate(.8) contrast(1.06) sepia(.08);transform:translateZ(0)"></div>
+          <div data-ba-clip="" style="position:absolute;inset:0;clip-path:{{ b2.clip }}">
+            <div data-lazy="assets/post-11-720.webp" data-lazy-hi="assets/post-11-1440.webp" data-lazy-wide="" style="position:absolute;inset:0;background-size:auto 200%;background-position:50% 0%;background-repeat:no-repeat;filter:saturate(.8) contrast(1.06) sepia(.08);transform:translateZ(0)"></div>
+          </div>
           <span style="position:absolute;left:16px;top:16px;font-size:11px;letter-spacing:.16em;background:#0B0B0A;color:#F1ECE2;padding:4px 8px">VORHER</span>
           <span style="position:absolute;right:16px;top:16px;font-size:11px;letter-spacing:.16em;background:#0B0B0A;color:#F1ECE2;padding:4px 8px">NACHHER</span>
-          <div style="position:absolute;top:0;bottom:0;left:{{ b2.left }};width:1px;background:#C6A15B">
+          <div data-ba-bar="" style="position:absolute;top:0;bottom:0;left:{{ b2.left }};width:1px;background:#C6A15B">
             <div role="slider" data-handle="" tabIndex="0" aria-label="Vergleich Uhrglas vorher und nachher" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ b2.pr }}" onKeyDown="{{ b2.key }}" style="position:absolute;top:50%;left:0;width:44px;height:44px;transform:translate(-50%,-50%);background:#0B0B0A;border:1px solid #C6A15B;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#C6A15B;font-size:12px"><svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 1L1 5l4 4M17 1l4 4-4 4"/></svg></div>
           </div>
         </div>
@@ -306,7 +325,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
 
 <section id="arbeiten" ref="{{ casesSecRef }}" aria-labelledby="h-arbeiten" style="position:relative;background:#0B0B0A;border-top:1px solid #2A2926">
   <div ref="{{ casesStickyRef }}" style="position:relative;display:flex;align-items:center">
-    <div ref="{{ casesTrackRef }}" style="display:flex;align-items:stretch;gap:24px;padding:clamp(96px,10vw,120px) clamp(20px,4vw,48px);will-change:transform;scrollbar-width:none">
+    <div ref="{{ casesTrackRef }}" style="display:flex;align-items:stretch;gap:24px;padding:clamp(96px,10vw,120px) clamp(20px,4vw,48px);scrollbar-width:none">
       <div style="flex:0 0 clamp(300px,30vw,440px);display:flex;flex-direction:column;justify-content:space-between;gap:40px;scroll-snap-align:start;padding-right:24px">
         <div data-reveal="" style="display:flex;align-items:baseline;gap:16px;padding-bottom:16px;border-bottom:1px solid #2A2926">
           <span style="font-size:13px;letter-spacing:.08em;color:#C6A15B;font-variant-numeric:tabular-nums">03</span>
@@ -321,7 +340,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
       <sc-for list="{{ cases }}" as="c" hint-placeholder-count="4">
         <button type="button" data-reveal="" data-cursor="view" onClick="{{ c.open }}" aria-label="{{ c.aria }}" style="flex:0 0 min(clamp(260px,32vw,480px), max(180px, calc((100svh - 240px) * .8)));display:flex;flex-direction:column;gap:20px;padding:0;margin:0;background:none;border:0;color:#F1ECE2;text-align:left;font:inherit;scroll-snap-align:start">
           <div style="position:relative;width:100%;aspect-ratio:4/5;overflow:hidden;background:#1A1A18">
-            <img data-zoom="" src="{{ c.img }}" srcset="{{ c.srcset }}" sizes="(min-width:1024px) 34vw, 75vw" decoding="async" alt="{{ c.alt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:{{ c.pos }};display:block;filter:saturate(.7) contrast(1.06) sepia(.1);transition:transform .9s cubic-bezier(.22,1,.36,1),filter .9s cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.05);filter:saturate(1) contrast(1.04) sepia(.04)"></img>
+            <img data-zoom="" data-lazy="{{ c.card }}" decoding="async" alt="{{ c.alt }}" style="width:100%;height:100%;object-fit:cover;object-position:{{ c.pos }};display:block;filter:saturate(.7) contrast(1.06) sepia(.1);transition:transform .9s cubic-bezier(.22,1,.36,1),filter .9s cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.05);filter:saturate(1) contrast(1.04) sepia(.04)"></img>
             <span style="position:absolute;left:16px;top:16px;font-size:13px;font-variant-numeric:tabular-nums;color:#F1ECE2;background:#0B0B0A;padding:4px 8px">{{ c.no }}</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-top:1px solid #2A2926;padding-top:16px">
@@ -347,7 +366,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
         <button type="button" onClick="{{ closeCase }}" style="height:44px;padding:0 16px;background:none;border:1px solid #2A2926;color:#F1ECE2;font:inherit;font-size:14px;border-radius:2px">Schliessen</button>
       </div>
       <div data-loupe="" style="position:relative;overflow:hidden;background:#0B0B0A">
-        <img ref="{{ ocImgRef }}" src="assets/post-02-1440.webp" decoding="async" alt="{{ oc.alt }}" style="width:100%;height:auto;display:block;filter:saturate(.85) contrast(1.06) sepia(.06)"></img>
+        <img ref="{{ ocImgRef }}" decoding="async" alt="{{ oc.alt }}" style="width:100%;height:auto;display:block;filter:saturate(.85) contrast(1.06) sepia(.06)"></img>
       </div>
       <div style="padding:48px clamp(20px,4vw,48px) 80px;display:flex;flex-wrap:wrap;gap:48px">
         <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:24px">
@@ -400,8 +419,8 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
         </sc-if>
         <ol style="list-style:none;margin:0;padding:0;border-top:1px solid #2A2926;display:{{ werkOlDisp }}">
           <sc-for list="{{ werkSteps }}" as="w" hint-placeholder-count="4">
-            <li style="grid-area:{{ werkLiArea }};display:flex;gap:24px;padding:20px 0;border-bottom:1px solid #2A2926;opacity:{{ w.op }};transform:{{ w.tf }};transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)">
-              <span style="flex:0 0 32px;font-size:14px;font-variant-numeric:tabular-nums;color:{{ w.numColor }};padding-top:4px;transition:color .6s">{{ w.no }}</span>
+            <li data-werk="{{ w.i }}" style="grid-area:{{ werkLiArea }};display:flex;gap:24px;padding:20px 0;border-bottom:1px solid #2A2926;opacity:{{ w.op }};transform:{{ w.tf }};transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)">
+              <span data-werk-num="" style="flex:0 0 32px;font-size:14px;font-variant-numeric:tabular-nums;color:{{ w.numColor }};padding-top:4px;transition:color .6s">{{ w.no }}</span>
               <div style="display:flex;flex-direction:column;gap:4px">
                 <span style="font-size:24px;font-weight:500;letter-spacing:-.02em">{{ w.title }}</span>
                 <span style="font-size:16px;color:#A9A6A0;max-width:420px">{{ w.text }}</span>
@@ -411,7 +430,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
         </ol>
         <sc-if value="{{ werkDots }}" hint-placeholder-val="{{ false }}">
           <div aria-hidden="true" style="display:flex;gap:8px;margin-top:-16px">
-            <sc-for list="{{ werkSteps }}" as="w" hint-placeholder-count="4"><span style="flex:1;height:2px;background:{{ w.bar }};transition:background .5s"></span></sc-for>
+            <sc-for list="{{ werkSteps }}" as="w" hint-placeholder-count="4"><span data-werk-bar="" style="flex:1;height:2px;background:{{ w.bar }};transition:background .5s"></span></sc-for>
           </div>
         </sc-if>
       </div>
@@ -484,9 +503,9 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
       </div>
       <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:{{ abCols }};gap:48px 32px">
         <sc-for list="{{ ablauf }}" as="a" hint-placeholder-count="4">
-          <li style="position:relative;display:flex;flex-direction:column;gap:16px;padding-left:{{ abPadL }}">
-            <span style="position:absolute;left:0;top:-5px;width:11px;height:11px;border-radius:2px;background:{{ a.node }};border:1px solid {{ a.nodeLine }};transition:background .5s,border-color .5s"></span>
-            <span style="font-size:14px;font-variant-numeric:tabular-nums;color:{{ a.numColor }};padding-top:{{ abPadT }};transition:color .5s">{{ a.no }}</span>
+          <li data-ab="{{ a.i }}" style="position:relative;display:flex;flex-direction:column;gap:16px;padding-left:{{ abPadL }}">
+            <span data-ab-node="" style="position:absolute;left:0;top:-5px;width:11px;height:11px;border-radius:2px;background:{{ a.node }};border:1px solid {{ a.nodeLine }};transition:background .5s,border-color .5s"></span>
+            <span data-ab-num="" style="font-size:14px;font-variant-numeric:tabular-nums;color:{{ a.numColor }};padding-top:{{ abPadT }};transition:color .5s">{{ a.no }}</span>
             <span style="font-size:clamp(24px,2.2vw,32px);font-weight:500;letter-spacing:-.025em;line-height:1.1">{{ a.title }}</span>
             <span style="color:#8C8A85;max-width:320px">{{ a.text }}</span>
           </li>
@@ -499,7 +518,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
 <section id="ankauf" aria-labelledby="h-ankauf" style="background:#0B0B0A;border-top:1px solid #2A2926">
   <div style="max-width:1360px;margin:0 auto;padding:clamp(96px,12vw,160px) clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,96px);align-items:center">
     <div data-reveal="" data-loupe="" style="flex:1 1 420px;position:relative;aspect-ratio:1/1;overflow:hidden;background:#1A1A18">
-      <img data-zoom="" src="assets/post-07-1440.webp" srcset="assets/post-07-720.webp 720w, assets/post-07-1440.webp 1440w" sizes="(min-width:1024px) 50vw, 100vw" decoding="async" alt="Zweifarbige Armbanduhr mit weissem Zifferblatt und römischen Ziffern in der Originalbox" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.8) contrast(1.08) sepia(.06) brightness(.95);transition:transform .9s cubic-bezier(.22,1,.36,1),filter .9s cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.05);filter:saturate(1) contrast(1.05)"></img>
+      <img data-zoom="" data-lazy="assets/post-07-720.webp" data-lazy-hi="assets/post-07-1440.webp" decoding="async" alt="Zweifarbige Armbanduhr mit weissem Zifferblatt und römischen Ziffern in der Originalbox" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.8) contrast(1.08) sepia(.06) brightness(.95);transition:transform .9s cubic-bezier(.22,1,.36,1),filter .9s cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.05);filter:saturate(1) contrast(1.05)"></img>
     </div>
     <div style="flex:1 1 420px;display:flex;flex-direction:column;gap:32px">
       <div data-reveal="" style="display:flex;align-items:baseline;gap:16px;padding-bottom:16px;border-bottom:1px solid #2A2926">
@@ -548,7 +567,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(46%,200px),1fr));gap:8px">
       <sc-for list="{{ insta }}" as="g" hint-placeholder-count="12">
         <a href="https://www.instagram.com/solothurnwatchclinic/" target="_blank" rel="noopener" data-reveal="" data-loupe="" aria-label="{{ g.alt }} – auf Instagram ansehen" style="position:relative;display:block;aspect-ratio:1/1;overflow:hidden;background:#1A1A18">
-          <img data-zoom="" src="{{ g.src }}" decoding="async" alt="{{ g.alt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.7) contrast(1.06) sepia(.1);transition:transform .9s cubic-bezier(.22,1,.36,1),filter .9s cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.05);filter:saturate(1) contrast(1.04)"></img>
+          <img data-zoom="" data-lazy="{{ g.src }}" decoding="async" alt="{{ g.alt }}" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.7) contrast(1.06) sepia(.1);transition:transform .9s cubic-bezier(.22,1,.36,1),filter .9s cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.05);filter:saturate(1) contrast(1.04)"></img>
         </a>
       </sc-for>
     </div>
@@ -681,7 +700,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:200
   </div>
 </footer>
 
-<a href="#kontakt" data-magnetic="" aria-hidden="{{ fabHidden }}" tabIndex="{{ fabTab }}" style="position:fixed;right:clamp(16px,3vw,32px);bottom:clamp(16px,3vw,32px);z-index:85;display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 24px;background:#C6A15B;color:#0B0B0A;font-size:15px;font-weight:500;border-radius:2px;overflow:hidden;opacity:{{ fabOp }};pointer-events:{{ fabPe }};translate:0 {{ fabY }};transition:opacity .5s cubic-bezier(.22,1,.36,1),translate .6s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)">
+<a data-fab="" href="#kontakt" data-magnetic="" aria-hidden="{{ fabHidden }}" tabIndex="{{ fabTab }}" style="position:fixed;right:clamp(16px,3vw,32px);bottom:clamp(16px,3vw,32px);z-index:85;display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 24px;background:#C6A15B;color:#0B0B0A;font-size:15px;font-weight:500;border-radius:2px;overflow:hidden;opacity:{{ fabOp }};pointer-events:{{ fabPe }};translate:0 {{ fabY }};transition:opacity .5s cubic-bezier(.22,1,.36,1),translate .6s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)">
   <span data-fill="" style="position:absolute;inset:0;background:#F1ECE2;transform:translateY(101%);transition:transform .6s cubic-bezier(.22,1,.36,1)"></span>
   <span style="position:relative">Termin anfragen</span>
 </a>
@@ -732,26 +751,39 @@ class Component extends DCLogic {
     this.finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
     this.fine = this.finePointer && (this.props.cursorEnabled ?? true);
     this.lastW = innerWidth;
+    this._wide = innerWidth >= 1024;
     this.setState({ fine: this.finePointer });
     if (this.state.intro) this.runIntro();
     if (this.fine) document.documentElement.classList.add('swc-cursor');
     this.lastY = scrollY; this.mx = this.cx = -200; this.my = this.cy = -200; this.px = this.py = 0; this.ppx = this.ppy = 0;
     this.on = [];
     const L = (t, ev, fn, o) => { t.addEventListener(ev, fn, o); this.on.push([t, ev, fn, o]); };
-    L(window, 'scroll', () => { if (!this.tick) { this.tick = true; requestAnimationFrame(() => { this.tick = false; this.update(); }); } }, { passive: true });
+    L(window, 'scroll', () => {
+      this._scrolling = true;
+      if (this.clockRaf) { cancelAnimationFrame(this.clockRaf); this.clockRaf = 0; }
+      clearTimeout(this._scrollEnd);
+      this._scrollEnd = setTimeout(() => {
+        this._scrolling = false;
+        if (!this.fine && !this.reduced) this.clockLoop();
+      }, 160);
+      if (!this.tick) { this.tick = true; requestAnimationFrame(() => { this.tick = false; this.update(); }); }
+    }, { passive: true });
     L(window, 'resize', () => {
       if (!this.finePointer && innerWidth === this.lastW) return;
       this.lastW = innerWidth;
-      clearTimeout(this.rz); this.rz = setTimeout(() => this.setState({ vw: innerWidth }, () => { this.layout(); this.update(); }), 120);
+      clearTimeout(this.rz);
+      this.rz = setTimeout(() => this.setState({ vw: innerWidth }, () => { this.layout(); this.retargetLazy(); this.update(); }), 120);
     });
-    L(window, 'orientationchange', () => setTimeout(() => { this.lastW = innerWidth; this.setState({ vw: innerWidth }, () => { this.layout(); this.update(); }); }, 300));
+    L(window, 'orientationchange', () => setTimeout(() => { this.lastW = innerWidth; this.setState({ vw: innerWidth }, () => { this.layout(); this.retargetLazy(); this.update(); }); }, 300));
     L(document, 'pointerdown', e => { if (e.pointerType === 'mouse' || this.reduced) return; const m = e.target.closest && e.target.closest('[data-magnetic]'); if (m) { this.pressed = m; m.style.transform = 'scale(.97)'; } }, { passive: true });
     const unpress = () => { if (this.pressed) { this.pressed.style.transform = ''; this.pressed = null; } };
     L(document, 'pointerup', unpress, { passive: true }); L(document, 'pointercancel', unpress, { passive: true });
-    L(window, 'mousemove', e => this.move(e), { passive: true });
-    L(document, 'mouseover', e => this.over(e, true));
-    L(document, 'mouseout', e => this.over(e, false));
-    L(document, 'mouseleave', () => { const c = this.el('cursorRef'); if (c) c.style.opacity = '0'; });
+    if (this.fine) {
+      L(window, 'mousemove', e => this.move(e), { passive: true });
+      L(document, 'mouseover', e => this.over(e, true));
+      L(document, 'mouseout', e => this.over(e, false));
+      L(document, 'mouseleave', () => { const c = this.el('cursorRef'); if (c) c.style.opacity = '0'; });
+    }
     L(document, 'click', e => this.anchor(e));
     L(window, 'keydown', e => { if (e.key === 'Escape') { if (this.state.openCase !== null) this.setState({ openCase: null }); if (this.state.menu) this.setState({ menu: false }); } });
     L(window, 'pointermove', e => {
@@ -764,16 +796,38 @@ class Component extends DCLogic {
     }, { passive: true });
     L(window, 'pointerup', () => { this.drag = null; });
     L(window, 'pointercancel', () => { this.drag = null; });
+    L(document, 'visibilitychange', () => { if (document.visibilityState === 'visible') this.armClock(); });
     const heroMap = { 'GMT-Detail': 'assets/post-12', 'Taucheruhr': 'assets/post-05-2' };
     const hi = this.el('heroImgRef'); const hb = heroMap[this.props.heroImage];
-    if (hi && hb) { hi.srcset = hb + '-720.webp 720w, ' + hb + '-1440.webp 1440w'; hi.src = hb + '-1440.webp'; }
+    if (hi && hb) {
+      const desk = innerWidth >= 1024;
+      const source = hi.closest('picture') && hi.closest('picture').querySelector('source');
+      if (source) source.srcset = desk ? hb + '-1440.webp' : '';
+      hi.src = desk ? hb + '-1440.webp' : hb + '-720.webp';
+    }
+    this.armClock();
+    this.scheduleClock();
+    if (!this.fine && !this.reduced) this.clockLoop();
+    this.setupLazy();
     this.setupReveal();
     this.layout(); this.update();
     if (document.fonts) document.fonts.ready.then(() => { this.layout(); this.update(); });
     this.t3 = setTimeout(() => { this.layout(); this.update(); }, 900);
-    const loop = () => { this.frame(); this.raf = requestAnimationFrame(loop); };
-    this.raf = requestAnimationFrame(loop);
+    if (this.fine) {
+      const loop = () => { this.frame(); this.raf = requestAnimationFrame(loop); };
+      this.raf = requestAnimationFrame(loop);
+    }
+    const top = document.getElementById('top');
+    if (top && 'ResizeObserver' in window) {
+      this.ro = new ResizeObserver(() => {
+        if (this._roTick) return;
+        this._roTick = true;
+        requestAnimationFrame(() => { this._roTick = false; this.measure(); });
+      });
+      this.ro.observe(top);
+    }
   }
+
   runIntro() {
     const DUR = 4000, start = performance.now() + 450, C = 1043.04;
     const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -805,22 +859,24 @@ class Component extends DCLogic {
   componentWillUnmount() {
     cancelAnimationFrame(this.introRaf);
     (this.on || []).forEach(([t, ev, fn, o]) => t.removeEventListener(ev, fn, o));
-    cancelAnimationFrame(this.raf); clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3);
-    if (this.io) this.io.disconnect(); if (this.zio) this.zio.disconnect();
+    cancelAnimationFrame(this.raf); cancelAnimationFrame(this.clockRaf); clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearTimeout(this.clockT); clearTimeout(this._lazyT); clearTimeout(this._scrollEnd);
+    if (this.io) this.io.disconnect(); if (this.zio) this.zio.disconnect(); if (this.lazyIO) this.lazyIO.disconnect(); if (this.ro) this.ro.disconnect();
     document.documentElement.classList.remove('swc-cursor'); document.body.style.overflow = '';
   }
+
   componentDidUpdate() {
     const s = this.state, ps = this.prevS || {};
     if (ps.openCase !== s.openCase || ps.menu !== s.menu)
       document.body.style.overflow = (s.openCase !== null || s.menu) ? 'hidden' : '';
-    const again = ps.vw !== undefined && (ps.vw !== s.vw || ps.sent !== s.sent);
     this.prevS = { openCase: s.openCase, menu: s.menu, vw: s.vw, sent: s.sent };
     const pi = this.el('prevImgRef');
     if (pi && s.hovered !== null) { const src = this.svcImgs[s.hovered]; if (pi.getAttribute('src') !== src) pi.setAttribute('src', src); }
     const oi = this.el('ocImgRef');
     if (oi && s.openCase !== null) { const src = this.cases[s.openCase].detail; if (oi.getAttribute('src') !== src) oi.setAttribute('src', src); }
-    if (again) this.update();
+    this._ex = null;
+    this.update();
   }
+
 
   anchor(e) {
     const a = e.target.closest && e.target.closest('a[href^="#"]');
@@ -857,13 +913,10 @@ class Component extends DCLogic {
       else { el.style.opacity = '1'; el.style.transform = 'none'; setTimeout(() => { el.style.transition = ''; el.style.transform = ''; }, 2400); }
     }), { rootMargin: '0px 0px -8% 0px' });
     this.zoomEls = [];
-    if (!this.finePointer && !this.reduced) document.querySelectorAll('[data-zoom]').forEach(img => {
-      img.style.transform = 'scale(1.14)'; img.style.transition = 'transform 1.6s cubic-bezier(.22,1,.36,1), filter 1.6s cubic-bezier(.22,1,.36,1)';
-      this.zoomEls.push(img);
-    });
+    if (!this.finePointer && !this.reduced) document.querySelectorAll('[data-zoom]').forEach(img => this.zoomEls.push(img));
     this.zio = new IntersectionObserver(es => es.forEach(en => {
       if (!en.isIntersecting) return; const img = en.target; this.zio.unobserve(img);
-      img.style.transform = 'scale(1)'; img.style.filter = 'saturate(1) contrast(1.04) sepia(.04)';
+      img.classList.add('is-in');
     }), { rootMargin: '0px 0px -12% 0px' });
     this.zoomEls.forEach(i => this.zio.observe(i));
     this.heroPending = [];
@@ -901,93 +954,208 @@ class Component extends DCLogic {
       if (this.pinned) { ws.style.height = desk ? '260svh' : '320svh'; Object.assign(wst.style, { position: 'sticky', top: '0px', height: '100svh' }); }
       else { ws.style.height = 'auto'; Object.assign(wst.style, { position: 'relative', height: 'auto' }); }
     }
+    this.measure();
   }
 
   update() {
-    const y = scrollY, vh = innerHeight, cl = v => Math.max(0, Math.min(1, v)), s = this.state, st = {};
-    const scrolled = y > 40; if (scrolled !== s.scrolled) st.scrolled = scrolled;
+    if (!this.box) this.measure();
+    const y = scrollY, vh = innerHeight, cl = v => Math.max(0, Math.min(1, v)), s = this.state;
+    const scrolled = y > 40;
+    if (scrolled !== s.scrolled) s.scrolled = scrolled;
     if (Math.abs(y - this.lastY) > 6) {
       const hide = y > this.lastY && y > 320 && !s.menu;
-      if (hide !== s.hideHeader) st.hideHeader = hide;
+      if (hide !== s.hideHeader) s.hideHeader = hide;
       this.lastY = y;
     }
-    const hi = this.el('heroImgRef');
-    if (hi && !this.reduced && y < vh * 1.3) hi.style.transform = `translate3d(0,${(y * 0.22).toFixed(1)}px,0) scale(${(1.06 + (y / vh) * 0.08).toFixed(4)})`;
-    const cs = this.el('casesSecRef'), tr = this.el('casesTrackRef');
+    this.syncHeader();
+    const mv = this.el('heroMoveRef');
+    if (mv && !this.reduced && y < vh * 1.3) mv.style.transform = `translate3d(0,${(y * 0.22).toFixed(1)}px,0) scale(${(1.06 + (y / vh) * 0.08).toFixed(4)})`;
+    const cs = this.box && this.box.cases, tr = this.el('casesTrackRef');
     if (this.pinned && this.casesPinned && cs && tr) {
-      const r = cs.getBoundingClientRect();
-      const p = cl(-r.top / Math.max(1, r.height - vh));
+      const top = cs.top - y;
+      const p = cl(-top / Math.max(1, cs.height - vh));
       tr.style.transform = `translate3d(${(-p * this.caseDist).toFixed(1)}px,0,0)`;
     }
-    const ws = this.el('werkSecRef');
+    const ws = this.box && this.box.werk;
     if (ws) {
-      const r = ws.getBoundingClientRect();
-      const t = this.pinned ? cl(-r.top / Math.max(1, r.height - vh)) : cl((vh - r.top) / (vh + r.height));
+      const top = ws.top - y;
+      const t = this.pinned ? cl(-top / Math.max(1, ws.height - vh)) : cl((vh - top) / (vh + ws.height));
       const ex = this.reduced ? 0.75 : Math.sin(Math.PI * cl(t * 1.15 - 0.05));
       this.setLayers(ex);
       const step = this.reduced ? -1 : Math.min(3, Math.floor(t * 4));
-      if (step !== s.werkStep) st.werkStep = step;
+      this.syncWerk(step);
     }
-    const ab = this.el('ablaufSecRef');
+    const ab = this.box && this.box.ab;
     if (ab) {
-      const r = ab.getBoundingClientRect();
-      const t = this.reduced ? 1 : cl((vh * 0.75 - (r.top + r.height * 0.35)) / (r.height * 0.45));
+      const top = ab.top - y;
+      const t = this.reduced ? 1 : cl((vh * 0.75 - (top + ab.height * 0.35)) / (ab.height * 0.45));
       const f = this.el('ablaufFillRef');
       if (f) f.style.transform = s.vw >= 1024 ? `scaleX(${t})` : `scaleY(${t})`;
       const step = t <= 0.01 ? -1 : Math.min(3, Math.floor(t * 4));
-      if (step !== s.abStep) st.abStep = step;
+      this.syncAb(step);
     }
-    if (!this.finePointer && !this.reduced) {
-      const rows = this.svcRows || (this.svcRows = [...document.querySelectorAll('[data-svc]')]);
+    if (!this.finePointer && !this.reduced && this.svcBoxes) {
       let best = null, bd = vh * 0.22;
-      rows.forEach(r => { const b = r.getBoundingClientRect(); const d = Math.abs(b.top + b.height / 2 - vh * 0.5); if (d < bd) { bd = d; best = +r.dataset.svc; } });
-      if (best !== s.hovered) st.hovered = best;
+      this.svcBoxes.forEach(b => {
+        const center = b.top + b.height / 2 - y;
+        const d = Math.abs(center - vh * 0.5);
+        if (d < bd) { bd = d; best = +b.el.dataset.svc; }
+      });
+      this.syncSvc(best);
     }
-    const map = [['leistungen', 'leistungen'], ['aufbereitung', 'leistungen'], ['arbeiten', 'arbeiten'], ['werk', 'werk'], ['ablauf', 'ablauf'], ['ankauf', 'ankauf'], ['instagram', ''], ['kontakt', 'kontakt']];
     let act = '';
-    map.forEach(([id, key]) => { const e = document.getElementById(id); if (e && e.getBoundingClientRect().top < vh * 0.45) act = key; });
-    if (act !== s.active) st.active = act;
-    const hero = this.el('heroRef'), foot = this.el('footerRef');
+    const line = y + vh * 0.45;
+    (this.navMarks || []).forEach(m => { if (m.top < line) act = m.key; });
+    if (act !== s.active) { s.active = act; this.syncNav(act); }
+    const hero = this.box && this.box.hero, foot = this.box && this.box.foot;
     if (hero && foot) {
-      const fab = hero.getBoundingClientRect().bottom < vh * 0.3 && foot.getBoundingClientRect().top > vh - 40 && !this.nearContact();
-      if (fab !== s.showFab) st.showFab = fab;
+      const fab = (hero.bottom - y) < vh * 0.3 && (foot.top - y) > vh - 40 && !this.nearContact(y, vh);
+      this.syncFab(fab);
     }
-    if (Object.keys(st).length) this.setState(st);
   }
-  nearContact() { const k = document.getElementById('kontakt'); if (!k) return false; const r = k.getBoundingClientRect(); return r.top < innerHeight * 0.6 && r.bottom > 0; }
+  nearContact(y, vh) {
+    const k = this.box && this.box.kontakt; if (!k) return false;
+    const top = k.top - y, bottom = k.bottom - y;
+    vh = vh || innerHeight;
+    return top < vh * 0.6 && bottom > 0;
+  }
+  measure() {
+    const y = scrollY;
+    const box = el => {
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return { top: r.top + y, height: r.height, bottom: r.bottom + y };
+    };
+    this.box = {
+      hero: box(this.el('heroRef')),
+      cases: box(this.el('casesSecRef')),
+      werk: box(this.el('werkSecRef')),
+      ab: box(this.el('ablaufSecRef')),
+      foot: box(this.el('footerRef')),
+      kontakt: box(document.getElementById('kontakt')),
+    };
+    this.svcBoxes = [...document.querySelectorAll('[data-svc]')].map(el => {
+      const r = el.getBoundingClientRect();
+      return { el, top: r.top + y, height: r.height };
+    });
+    const marks = [['leistungen', 'leistungen'], ['aufbereitung', 'leistungen'], ['arbeiten', 'arbeiten'], ['werk', 'werk'], ['ablauf', 'ablauf'], ['ankauf', 'ankauf'], ['instagram', ''], ['kontakt', 'kontakt']];
+    this.navMarks = marks.map(([id, key]) => {
+      const e = document.getElementById(id);
+      const r = e && e.getBoundingClientRect();
+      return { key, top: r ? r.top + y : Infinity };
+    });
+  }
+  syncHeader() {
+    const s = this.state;
+    const key = (s.hideHeader && !s.menu ? 1 : 0) | (s.scrolled ? 2 : 0);
+    if (key === this._hdr) return;
+    this._hdr = key;
+    const h = document.querySelector('[data-header]');
+    const bar = document.querySelector('[data-header-bar]');
+    if (h) {
+      h.style.transform = s.hideHeader && !s.menu ? 'translateY(-100%)' : 'translateY(0)';
+      h.style.background = s.scrolled ? 'rgba(11,11,10,.94)' : 'rgba(11,11,10,0)';
+      h.style.borderBottomColor = s.scrolled ? '#2A2926' : 'rgba(42,41,38,0)';
+    }
+    if (bar) bar.style.height = s.scrolled ? '64px' : '88px';
+  }
+  syncNav(active) {
+    document.querySelectorAll('[data-nav]').forEach(a => {
+      const on = a.dataset.nav === active;
+      a.style.color = on ? '#F1ECE2' : '#B9B5AD';
+      const dot = a.querySelector('[data-nav-dot]');
+      if (dot) { dot.style.opacity = on ? '1' : '0'; dot.style.transform = on ? 'scale(1)' : 'scale(0)'; }
+    });
+  }
+  syncSvc(i) {
+    if (this._svc === i) return;
+    this._svc = i;
+    this.state.hovered = i;
+    document.querySelectorAll('[data-svc]').forEach(row => {
+      const on = i !== null && +row.dataset.svc === i;
+      const line = row.querySelector('[data-svc-line]');
+      const num = row.querySelector('[data-svc-num]');
+      const title = row.querySelector('[data-svc-title]');
+      if (line) line.style.transform = on ? 'scaleX(1)' : 'scaleX(0)';
+      if (num) num.style.color = on ? '#84632A' : '#5E5C57';
+      if (title) title.style.transform = on && !this.reduced ? 'translateX(8px)' : 'translateX(0)';
+    });
+    const pv = this.el('previewRef');
+    if (pv) pv.style.opacity = i !== null ? '1' : '0';
+    const img = this.el('prevImgRef');
+    if (img) {
+      img.style.transform = i !== null ? 'scale(1)' : 'scale(1.1)';
+      if (i !== null) { const src = this.svcImgs[i]; if (src && img.getAttribute('src') !== src) img.src = src; }
+    }
+  }
+  syncWerk(step) {
+    if (this._werk === step) return;
+    this._werk = step;
+    this.state.werkStep = step;
+    const stack = innerWidth < 1024 && this.pinned;
+    document.querySelectorAll('[data-werk]').forEach(li => {
+      const i = +li.dataset.werk;
+      const on = step === -1 || step === i;
+      li.style.opacity = on ? '1' : (stack ? '0' : '0.35');
+      li.style.transform = stack && !on ? (i < step ? 'translate3d(0,-16px,0)' : 'translate3d(0,16px,0)') : 'none';
+      const num = li.querySelector('[data-werk-num]');
+      if (num) num.style.color = step === i ? '#C6A15B' : '#8C8A85';
+    });
+    document.querySelectorAll('[data-werk-bar]').forEach((bar, i) => {
+      bar.style.background = step >= i ? '#C6A15B' : '#2A2926';
+    });
+  }
+  syncAb(step) {
+    if (this._ab === step) return;
+    this._ab = step;
+    this.state.abStep = step;
+    document.querySelectorAll('[data-ab]').forEach(li => {
+      const i = +li.dataset.ab;
+      const on = step >= i;
+      const node = li.querySelector('[data-ab-node]');
+      const num = li.querySelector('[data-ab-num]');
+      if (node) { node.style.background = on ? '#C6A15B' : '#0B0B0A'; node.style.borderColor = on ? '#C6A15B' : '#4A4843'; }
+      if (num) num.style.color = on ? '#C6A15B' : '#8C8A85';
+    });
+  }
+  syncFab(show) {
+    if (this._fab === show) return;
+    this._fab = show;
+    this.state.showFab = show;
+    const a = document.querySelector('[data-fab]');
+    if (!a) return;
+    a.style.opacity = show ? '1' : '0';
+    a.style.pointerEvents = show ? 'auto' : 'none';
+    a.style.translate = show ? '0 0' : '0 16px';
+    a.setAttribute('aria-hidden', show ? 'false' : 'true');
+    a.tabIndex = show ? 0 : -1;
+  }
 
   setLayers(ex) {
     const svg = this.el('werkSvgRef'); if (!svg) return;
-    svg.querySelectorAll('[data-layer]').forEach(g => {
+    const key = ex.toFixed(3);
+    if (key === this._ex) return;
+    this._ex = key;
+    const layers = this._layers || (this._layers = [...svg.querySelectorAll('[data-layer]')]);
+    const labels = this._labels || (this._labels = [...svg.querySelectorAll('[data-wlabel]')]);
+    const op = Math.max(0, ex * 1.4 - 0.4).toFixed(2);
+    layers.forEach(g => {
       const i = +g.dataset.layer;
       g.setAttribute('transform', `translate(0 ${(290 + (i - 2.5) * (9 + 74 * ex)).toFixed(1)})`);
     });
-    svg.querySelectorAll('[data-wlabel]').forEach(l => { l.style.opacity = Math.max(0, ex * 1.4 - 0.4).toFixed(2); });
+    labels.forEach(l => { l.style.opacity = op; });
   }
 
   frame() {
-    const now = Date.now();
-    if (!this.offAt || now - this.offAt > 60000) this.calcTz(now);
-    const z = new Date(now + this.off);
-    const h = z.getUTCHours(), m = z.getUTCMinutes(), sRaw = z.getUTCSeconds(), ms = z.getUTCMilliseconds();
-    const s = this.reduced ? sRaw : sRaw + ms / 1000;
-    const H = this.el('hRef'), M = this.el('mRef'), S = this.el('sRef');
-    if (H) H.setAttribute('transform', `rotate(${((h % 12) + m / 60) * 30} 70 70)`);
-    if (M) M.setAttribute('transform', `rotate(${(m + s / 60) * 6} 70 70)`);
-    if (S) S.setAttribute('transform', `rotate(${s * 6} 70 70)`);
-    if (sRaw !== this.lastSec) {
-      this.lastSec = sRaw; const lb = this.el('clockLabelRef'); const p = n => String(n).padStart(2, '0');
-      if (lb) lb.textContent = `${p(h)}:${p(m)}:${p(sRaw)}`;
-    }
-    if (this.fine) {
-      const k = this.reduced ? 1 : 0.2;
-      this.cx += (this.mx - this.cx) * k; this.cy += (this.my - this.cy) * k;
-      const c = this.el('cursorRef'); if (c) c.style.transform = `translate3d(${this.cx.toFixed(1)}px,${this.cy.toFixed(1)}px,0)`;
-    }
+    if (!this.fine) return;
+    if (!this.reduced) this.paintHandsNow();
+    const k = this.reduced ? 1 : 0.2;
+    this.cx += (this.mx - this.cx) * k; this.cy += (this.my - this.cy) * k;
+    const c = this.el('cursorRef'); if (c) c.style.transform = `translate3d(${this.cx.toFixed(1)}px,${this.cy.toFixed(1)}px,0)`;
     const pv = this.el('previewRef');
     if (pv) {
-      const k = this.reduced ? 1 : 0.12;
-      this.ppx += (this.mx + 32 - this.ppx) * k; this.ppy += (this.my - 175 - this.ppy) * k;
+      const k2 = this.reduced ? 1 : 0.12;
+      this.ppx += (this.mx + 32 - this.ppx) * k2; this.ppy += (this.my - 175 - this.ppy) * k2;
       pv.style.transform = `translate3d(${this.ppx.toFixed(1)}px,${this.ppy.toFixed(1)}px,0)`;
     }
   }
@@ -998,6 +1166,98 @@ class Component extends DCLogic {
       this.off = Date.UTC(g('year'), g('month') - 1, g('day'), g('hour'), g('minute'), g('second')) - Math.floor(now / 1000) * 1000;
     } catch (e) { this.off = 3600000; }
     this.offAt = now;
+  }
+  armClock() {
+    const now = Date.now();
+    this.calcTz(now);
+    this.paintHandsNow();
+    const z = new Date(now + (this.off || 0));
+    this.paintLabel(z.getUTCHours(), z.getUTCMinutes(), z.getUTCSeconds());
+  }
+  paintHandsNow() {
+    const now = Date.now();
+    if (!this.offAt || now - this.offAt > 60000) this.calcTz(now);
+    const z = new Date(now + (this.off || 0));
+    const h = z.getUTCHours(), m = z.getUTCMinutes(), s = z.getUTCSeconds(), ms = z.getUTCMilliseconds();
+    this.paintHands(h, m, s, this.reduced ? 0 : ms);
+  }
+  clockLoop() {
+    if (this.fine || this.reduced || this._scrolling) return;
+    this.paintHandsNow();
+    this.clockRaf = requestAnimationFrame(() => this.clockLoop());
+  }
+  paintHands(h, m, s, ms) {
+    const sec = s + ms / 1000;
+    const H = this.el('hRef'), M = this.el('mRef'), S = this.el('sRef');
+    if (H) H.setAttribute('transform', `rotate(${((h % 12) + m / 60 + sec / 3600) * 30} 70 70)`);
+    if (M) M.setAttribute('transform', `rotate(${(m + sec / 60) * 6} 70 70)`);
+    if (S) S.setAttribute('transform', `rotate(${sec * 6} 70 70)`);
+  }
+  paintLabel(h, m, s) {
+    const lb = this.el('clockLabelRef'); if (!lb) return;
+    const p = n => String(n).padStart(2, '0');
+    lb.textContent = `${p(h)}:${p(m)}:${p(s)}`;
+  }
+  scheduleClock() {
+    const tick = () => {
+      const now = Date.now();
+      if (!this.offAt) this.calcTz(now);
+      const z = new Date(now + (this.off || 0));
+      const h = z.getUTCHours(), m = z.getUTCMinutes(), s = z.getUTCSeconds();
+      this.paintLabel(h, m, s);
+      if (this.reduced) this.paintHands(h, m, s, 0);
+      this.clockT = setTimeout(tick, 1000 - (now % 1000) + 30);
+    };
+    tick();
+  }
+  loadLazy(el) {
+    if (!el || el.dataset.lazyOn) return;
+    const wide = innerWidth >= 1024;
+    const retina = (window.devicePixelRatio || 1) >= 1.5;
+    const useHi = el.dataset.lazyHi && (el.hasAttribute('data-lazy-wide') || (wide && retina));
+    const url = useHi ? el.dataset.lazyHi : el.dataset.lazy;
+    if (!url) return;
+    el.dataset.lazyOn = '1';
+    if (el.tagName === 'IMG') el.src = url;
+    else el.style.backgroundImage = `url("${url}")`;
+    if (this.lazyIO) this.lazyIO.unobserve(el);
+  }
+  retargetLazy() {
+    const wide = innerWidth >= 1024;
+    if (wide === this._wide) return;
+    this._wide = wide;
+    document.querySelectorAll('[data-lazy-hi]').forEach(el => { delete el.dataset.lazyOn; this.loadLazy(el); });
+  }
+  setupLazy() {
+    const els = [...document.querySelectorAll('[data-lazy]')];
+    const vh = innerHeight || 700;
+    const now = [], later = [];
+    els.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top < vh * 1.6) now.push(el); else later.push(el);
+    });
+    now.forEach(el => this.loadLazy(el));
+    this._later = later;
+    if ('IntersectionObserver' in window) {
+      this.lazyIO = new IntersectionObserver(es => {
+        es.forEach(en => { if (en.isIntersecting) this.loadLazy(en.target); });
+      }, { rootMargin: '35% 0px' });
+      later.forEach(el => this.lazyIO.observe(el));
+    }
+    const pump = () => {
+      if (this._scrolling) { this._lazyT = setTimeout(pump, 200); return; }
+      const el = this._later && this._later.shift();
+      if (!el) return;
+      this.loadLazy(el);
+      this._lazyT = setTimeout(pump, 70);
+    };
+    this._lazyT = setTimeout(pump, 350);
+  }
+  cardSrc(c) {
+    const wide = (this.state.vw || 0) >= 1024 && (window.devicePixelRatio || 1) >= 1.5;
+    if (!wide) return c.img;
+    const m = /([^\s,]+\.webp)\s+1440w/.exec(c.srcset || '');
+    return m ? m[1] : c.img;
   }
 
   move(e) {
@@ -1051,7 +1311,14 @@ class Component extends DCLogic {
     const el = this.baEls && this.baEls[i]; if (!el) return;
     const r = el.getBoundingClientRect();
     const p = Math.max(0, Math.min(100, ((x - r.left) / r.width) * 100));
-    this.setState(s => { const ba = s.ba.slice(); ba[i] = p; return { ba }; });
+    if (!this.state.ba) this.state.ba = [50, 50, 50];
+    this.state.ba[i] = p;
+    const clip = el.querySelector('[data-ba-clip]');
+    const bar = el.querySelector('[data-ba-bar]');
+    const handle = el.querySelector('[role="slider"]');
+    if (clip) clip.style.clipPath = `inset(0 ${(100 - p).toFixed(2)}% 0 0)`;
+    if (bar) bar.style.left = p.toFixed(2) + '%';
+    if (handle) handle.setAttribute('aria-valuenow', String(Math.round(p)));
   }
   baItem(i) {
     const p = this.state.ba[i];
@@ -1075,11 +1342,11 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state, desk = s.vw >= 1024;
     const navDef = [['Service', '#leistungen', 'leistungen'], ['Restauration', '#werk', 'werk'], ['Arbeiten', '#arbeiten', 'arbeiten'], ['An- und Verkauf', '#ankauf', 'ankauf'], ['Ablauf', '#ablauf', 'ablauf'], ['Kontakt', '#kontakt', 'kontakt']];
-    const nav = navDef.map(([label, href, id], i) => ({ label, href, no: String(i + 1).padStart(2, '0'), delay: (80 + i * 60) + 'ms', dot: s.active === id ? 1 : 0, color: s.active === id ? '#F1ECE2' : '#B9B5AD' }));
+    const nav = navDef.map(([label, href, id], i) => ({ label, href, id, no: String(i + 1).padStart(2, '0'), delay: (80 + i * 60) + 'ms', dot: s.active === id ? 1 : 0, color: s.active === id ? '#F1ECE2' : '#B9B5AD' }));
     const svc = {};
     for (let i = 0; i < 6; i++) {
       const on = s.hovered === i;
-      svc['s' + i] = { enter: () => this.setState({ hovered: i }), line: on ? 'scaleX(1)' : 'scaleX(0)', num: on ? '#84632A' : '#5E5C57', shift: on && !this.reduced ? 'translateX(8px)' : 'translateX(0)' };
+      svc['s' + i] = { enter: () => this.syncSvc(i), line: on ? 'scaleX(1)' : 'scaleX(0)', num: on ? '#84632A' : '#5E5C57', shift: on && !this.reduced ? 'translateX(8px)' : 'translateX(0)' };
     }
     const oc = s.openCase !== null ? this.cases[s.openCase] : this.cases[0];
     const werkDef = [
@@ -1106,24 +1373,24 @@ class Component extends DCLogic {
       headerLine: s.scrolled ? '#2A2926' : 'rgba(42,41,38,0)',
       headerH: s.scrolled ? '64px' : '88px',
       nav,
-      heroRef: this.ref('heroRef'), heroImgRef: this.ref('heroImgRef'), clockLabelRef: this.ref('clockLabelRef'),
+      heroRef: this.ref('heroRef'), heroImgRef: this.ref('heroImgRef'), heroMoveRef: this.ref('heroMoveRef'), clockLabelRef: this.ref('clockLabelRef'),
       hRef: this.ref('hRef'), mRef: this.ref('mRef'), sRef: this.ref('sRef'),
       ...svc,
-      leaveService: () => this.setState({ hovered: null }),
+      leaveService: () => this.syncSvc(null),
       showPreview: desk && s.fine, previewRef: this.ref('previewRef'),
       prevOp: s.hovered !== null ? 1 : 0, prevScale: s.hovered !== null ? 1 : 1.1,
       prevImgRef: this.ref('prevImgRef'), ocImgRef: this.ref('ocImgRef'),
       b0: this.baItem(0), b1: this.baItem(1), b2: this.baItem(2),
       casesSecRef: this.ref('casesSecRef'), casesStickyRef: this.ref('casesStickyRef'), casesTrackRef: this.ref('casesTrackRef'),
-      cases: this.cases.map((c, i) => ({ ...c, aria: `${c.brand} ${c.title}: Arbeitsschritte ansehen`, open: () => this.setState({ openCase: i }) })),
+      cases: this.cases.map((c, i) => ({ ...c, card: this.cardSrc(c), aria: `${c.brand} ${c.title}: Arbeitsschritte ansehen`, open: () => this.setState({ openCase: i }) })),
       modalOpen: s.openCase !== null, oc: { ...oc, aria: `${oc.brand} ${oc.title}` }, closeCase: () => this.setState({ openCase: null }),
       werkSecRef: this.ref('werkSecRef'), werkStickyRef: this.ref('werkStickyRef'), werkSvgRef: this.ref('werkSvgRef'),
       werkSteps: werkDef.map(([title, text], i) => { const on = s.werkStep === -1 || s.werkStep === i; const stack = !desk && s.pinned;
-        return { no: String(i + 1).padStart(2, '0'), title, text, op: on ? 1 : (stack ? 0 : 0.35), tf: stack && !on ? (i < s.werkStep ? 'translate3d(0,-16px,0)' : 'translate3d(0,16px,0)') : 'none', numColor: s.werkStep === i ? '#C6A15B' : '#8C8A85', bar: s.werkStep >= i ? '#C6A15B' : '#2A2926' }; }),
+        return { i, no: String(i + 1).padStart(2, '0'), title, text, op: on ? 1 : (stack ? 0 : 0.35), tf: stack && !on ? (i < s.werkStep ? 'translate3d(0,-16px,0)' : 'translate3d(0,16px,0)') : 'none', numColor: s.werkStep === i ? '#C6A15B' : '#8C8A85', bar: s.werkStep >= i ? '#C6A15B' : '#2A2926' }; }),
       werkOlDisp: !desk && s.pinned ? 'grid' : 'block', werkLiArea: !desk && s.pinned ? '1 / 1' : 'auto', werkDots: !desk && !!s.pinned,
       werkTextOrder: desk ? 0 : 2, werkSvgMax: desk ? '560px' : 'min(100%, 42svh)', werkPad: desk ? 'clamp(80px,9vw,120px) clamp(20px,4vw,48px)' : '72px clamp(20px,4vw,48px) 24px',
       ablaufSecRef: this.ref('ablaufSecRef'), ablaufFillRef: this.ref('ablaufFillRef'),
-      ablauf: ablaufDef.map(([title, text], i) => { const on = s.abStep >= i; return { no: String(i + 1).padStart(2, '0'), title, text, node: on ? '#C6A15B' : '#0B0B0A', nodeLine: on ? '#C6A15B' : '#4A4843', numColor: on ? '#C6A15B' : '#8C8A85' }; }),
+      ablauf: ablaufDef.map(([title, text], i) => { const on = s.abStep >= i; return { i, no: String(i + 1).padStart(2, '0'), title, text, node: on ? '#C6A15B' : '#0B0B0A', nodeLine: on ? '#C6A15B' : '#4A4843', numColor: on ? '#C6A15B' : '#8C8A85' }; }),
       abCols: desk ? 'repeat(4,minmax(0,1fr))' : 'minmax(0,1fr)',
       abLineL: desk ? '0' : '5px', abLineT: desk ? '0' : '0', abLineW: desk ? '100%' : '1px', abLineH: desk ? '1px' : '100%',
       abOrigin: desk ? 'left center' : 'center top', abPadL: desk ? '0' : '40px', abPadT: desk ? '24px' : '0',
